@@ -2,7 +2,7 @@
 
 My coworker, Jesse Fulton, asked me to look into bringing the knowledge gained in my recent machine-learning classes to bear on the problem of assigning attribution to an image based on its similarity to a known image in an existing corpus.
 
-My initial response was to suggest that there might be a manual way to determine that two images were essentially the same, by hashing scaled-down copies of the images, and comparing the hashes.  This was naive and doesn't scale well.
+My initial response was to suggest that there might be a manual way to determine that two images were essentially the same, by hashing scaled-down copies of the images, and comparing the hashes.  This was naïve and doesn't scale well.
 
 I wasn't sure anything would scale well.  When checking an unknown image for similarity to an existing corpus of images, can you avoid comparing it to every known image?  Or can the comparison be sped up to make such a check feasible?
 
@@ -23,3 +23,17 @@ But there are a couple of questions we would like to answer, beyond what is alre
 1. Is there a useful "similarity distance" that can be configured to find images effectively identical to known originals, even when they have been modified to prevent easy identification?
 
 2. How quickly can comparisons be performed?  How many images can we check in a given time period?  Is it fast enough to be useful?  Does it scale well enough?
+
+## Steps forward
+
+It's not absolutely necessary for these steps to be taken in the listed order.
+
+1. Identify a useful set of images to operate on.  In the short term, only a few images should be needed to demonstrate the base functionality.  More images may be needed later to determine the limits of the solution.
+
+1. Replicate the work in the original article to store vector representations of a set of images, and then writing out a list of the most similar images for each one in a JSON file.
+
+  a. Modify the original code to accept input images to be fetched from remote servers, to store the vectors in a database.
+
+  a. Write a web service to use the stored data to return the most similar images for a given image (and similarity threshold)?
+
+1. Write a harness around the nearest-neighbor code to estimate the memory and time requirements for N vectors.
